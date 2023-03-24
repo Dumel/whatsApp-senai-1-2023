@@ -1,9 +1,8 @@
 'use strict'
 
-import { contatos } from "https://fernandoleonid.github.io/whatsApp-senai-1-2023/recursos/contatos.js"
+// import { contatos } from "https://fernandoleonid.github.io/whatsApp-senai-1-2023/recursos/contatos.js"
 
 let i = 0
-
 
 
 const criarContato = (contato) => {
@@ -31,7 +30,12 @@ const criarContato = (contato) => {
         return contact
 }
 
-const carregarContatos = () => {
+const carregarContatos =  async () => {
+    
+    const url = `http://localhost:8080/v1/whatsapp/id?id=2`
+    const response = await fetch(url)
+    const contatos = await response.json()
+
     const container = document.getElementById('container')
     const contacts = contatos.map(criarContato)
 
@@ -165,23 +169,9 @@ const carregarContatos = () => {
 
 }
 
-const lightTheme = {
-    '--primary__color': '#26CE4B',
-    '--font__color': '#fff',
-    '--backContact__color': '#98D1A4',
-    '--backImage': 'url(../img/dia.jpg)',
-    '--backFinder': '#62B774',
 
-}
 
-const darkTheme = {
-    '--primary__color': '#263238',
-    '--font__color': '#b0bec5',
-    '--backContact__color': '#455a64',
-    '--backImage': 'url(../img/noite.jpg)',
-    '--backFinder': '#37474f',
 
-}
 
 const chk = document.getElementById('chk')
 const rootElement = document.documentElement
